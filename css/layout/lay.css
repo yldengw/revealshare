@@ -1,0 +1,47 @@
+.reveal>.backgrounds{
+	background:  url(../../img/layout/iced.png) no-repeat center 680px;
+	background-size: 92px 28px;
+}
+.txt-rt{
+	text-align: right;
+}
+.txt-lt{
+	text-align: left;
+}
+.ft-lt{
+	font-size: 22px !important;
+}
+.ft-sm{
+	font-size: 18px !important;
+}
+.ft-little{
+	font-size: 24px !important;
+}
+.ft-noml{
+    font-size: 28px !important;
+}
+.box{
+	width: 800px;
+	margin: 0 auto;
+	text-align: left;
+}
+.red{
+	color: #f00;
+}
+.panle-lf{
+	width: 600px;
+	float: left;
+}
+.panle-rt{
+	width: 500px;
+	float: right;
+	text-align: left;
+}
+.panle-box{
+	width: 1130px;
+	height: 500px;
+	margin: 0 auto;
+}
+.mar-top{
+	padding-top: 75px !important;
+}

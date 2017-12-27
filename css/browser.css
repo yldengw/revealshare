@@ -1,0 +1,42 @@
+/*wanglu - 浏览器兼容性*/
+
+.browser h1{
+	margin-bottom: 80px;
+}
+.browser h2 p{
+	width: 1000px;
+	font-size: 1em;
+	color: #000000;
+}
+.browser .issue{
+	font-size: 2em;
+	text-align: left;
+	color: #000000;
+	
+}
+.browser .head{
+	font-size: 2em;
+	text-align: center;
+	color: #000000;
+}
+.browser .iss-des{
+	width: 1200px;
+	font-size: 1.5em;
+	text-align: left;
+	padding-left: 100px;
+	color: #000000;
+}
+.browser .box{
+	width: 1000px;
+	margin-left: -100px;
+}
+.browser .iss-rate{
+	font-size: 1em;
+	color: #666;
+	text-align: left;
+	padding-left: 100px;
+	margin-top: 100px;
+}
+.browser .mtop60 .iss-rate{
+	margin-top: 60px;
+}
