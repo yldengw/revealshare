@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>浏览器兼容性测试</title>
+		 <!--<link rel="stylesheet" href="css/reset.css" />--> 
+		<style>
+		/*常见问题一*/
+			/**{
+				margin:0;
+				padding: 0;
+			}*/
+			.issue1{
+				width: 400px;
+				height: 400px;
+				background: #ccc;
+			}
+			
+			/*常见问题二*/
+			.issue2{
+				width: 500px;
+				height: 30px;
+				font-size: 14px;
+				font-family: simsun;
+				margin: 40px 0;
+				background: yellow;
+				line-height: 30px;
+			}
+
+			/*常见问题三*/
+			.issue3{
+				height: 200px;
+				width: 100%;
+			}
+			.issue3 img{
+				/*float: left;*/
+			}
+			
+			/*常见问题四*/	
+			.issue4{
+				width: 200px;
+				height: 200px;
+				margin: 50px 0;
+				background: #34A2D9;
+				filter:alpha(opacity=50); 
+			    -moz-opacity:0.5;  
+				-khtml-opacity: 0.5;  
+			    opacity: 0.5;  
+			}
+			/*常见问题五*/
+			.issue5{
+				width: auto;
+				height: 400px;
+				/*background: #C8C9CC url(img/PIC1.png) no-repeat;
+				background-position-x: 300px;
+				background-position-y: 100px;*/
+				background: #C8C9CC url(img/PIC1.png) no-repeat scroll 300px 100px;
+			}
+			/*常见问题六*/
+			.issue6{
+				width: 200px;
+				height: 32px;
+				line-height: 32px;
+				margin: 50px 0;
+				/*outline: none;*/
+			}
+			/*常见问题七*/
+			.issue7{
+				width: 500px;
+				height: 35px;
+				line-height:35px ;
+				background: #4C89C8;
+				color: #fff;
+				margin-bottom: 50px;
+			}
+			.red-div{
+				width: 35px;
+				height: 35px;
+				background: url(img/close.png) no-repeat;
+			}
+			.float-right{
+				float: right;
+			}
+			.float-left{
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<!--常见问题一-->
+		<div class="issue1">this is div</div>
+		
+		<!--常见问题二-->
+		<input type="text" value="我想要垂直居中" class="issue2"/>
+		
+		<!--常见问题三-->
+		<div class="issue3">
+			<img src="img/pic2-min.png" />
+			<img src="img/pic2-min.png" />
+			<img src="img/pic2-min.png" />
+		</div>
+		
+		<!--常见问题四-->	
+		<div class="issue4">
+			这是一个半透明层
+		</div>
+		
+		<!--常见问题五-->
+		<div class="issue5"></div>
+		
+		<!--常见问题六-->
+		<input type="text" class="issue6" />
+		
+		<!--常见问题七：IE7下-->
+		<div class="issue7">
+			<span class="float-left">系统提示消息</span>
+			<div class="red-div float-right"></div>
+		</div>
+
+	</body>
+</html>
