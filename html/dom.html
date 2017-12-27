@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+	</head>
+	<body>
+		<div id="div1"></div>
+	</body>
+</html>
+<script>
+    var times = 10000;
+    var time1 = function(){
+    	var time = times;
+    	while(time--){
+    		//dom的两个操作放在循环内
+    		var dom = document.querySelector('#div1');
+    		dom.innerHTML+='a';
+    	}
+    }
+    var time2 = function(){
+    	var time = times;
+    	dom = document.querySelector('#div1');
+    	while(time--){
+    		//dom的一个操作放在循环内
+    		dom.innerHTML+='a';
+    	}
+    }
+    var time3 = function(){
+    	var time = times;
+    	dom = document.querySelector('#div1');
+    	str = '';
+    	while(time--){
+    		//循环内不妨在dom的操作
+    		str +='a';
+    	}
+    	dom.innerHTML = str;
+    }
+    console.time(1);
+    //设置时间起点
+    time1();
+    console.timeEnd(1); 
+    console.time(2);
+    //设置时间起点
+    time2();
+    console.timeEnd(2);
+     console.time(3);
+    //设置时间起点
+    time3();
+    console.timeEnd(3);
+</script>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+	</head>
+	<body>
+		<input id="userSearcher" type="text">
+		 <!--//在DOM中直接绑定事件,onmouseover、onmouseout、onkeydown等
+         <input type="button" value="click me" onclick="hello()">
+         <script>
+         	function hello(){
+         		alert("hello world!");
+         	}
+         </script>
+         //在js代码中绑定事件
+          <input type="button" value="click me" id="btn">
+           <script>
+              document.getElementById("btn").onclick = function(){
+              	  alert("hello world");
+              }
+         </script>
+         -->
+	</body>
+</html>
+<script>
+	//假设input的id是userSearcher
+	//给其绑定keyup事件
+	$('#userSearcher').keyup(function(){
+		//清除之前存起来的延迟动作
+		$.each(timeoutList, function(i) {
+			clearTimeout(timeoutList[i]);
+		});
+		timeoutList = [];
+		//给本次事件设置延迟执行的动作，延迟200毫秒能兼顾性能和用户体验
+		var thisHandle = setTimeout(timeoutFuc,500);
+		//将延迟动作存入列表
+		timeoutList.push(thisHandle);
+	}) 
+	//延迟列表
+	var timeoutList = [];
+	//延迟执行的动作
+	function timeoutFuc(){
+		var uid = $('#useSearcher').val();	
+//		 $.ajax({
+//           type: "GET",
+//           url: "test",
+//           data: {userid:uid},
+//           success: function(msg){
+//                       $('#userList').html('').html(msg);
+//                    }
+//       });
+       console.log('userList');
+	}
+//	$('#userSearcher').keyup(function(){
+//		timeoutFuc();
+//	})
+</script>

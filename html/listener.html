@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="button" value="click me" id="btn1">
+		<input type="button" value="click me" id="btn2">
+	</body>
+</html>
+<script>
+	var btn1 = document.getElementById("btn1");
+	btn1.onclick = function(){
+		alert("hello1");//不执行
+	}
+	btn1.onclick = function(){
+		alert("hello2");//执行
+	}
+	var btn2 = document.getElementById("btn2");
+	btn2.addEventListener("click",hello1);
+	btn2.addEventListener("click",hello2);
+	//解除相应的绑定
+	//btn2.removeEventListener("click",hello1);
+	function hello1(){
+		alert("hello 1");
+	}
+	function hello2(){
+		alert("hello 2");
+	}
+</script>

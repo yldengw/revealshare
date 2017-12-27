@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+    *{
+    	margin: 0;
+    	padding: 0;
+    }
+    body{
+    	background: #fff;
+    	font-size: 15px;
+      font-family: Microsoft YaHei;
+    }
+    a{
+    	text-decoration: none;
+        color: #333;
+    }
+    .form{
+        width: 450px;
+        padding: 20px;
+        height: 330px;
+        margin: 100px auto;
+        border: 2px solid #bbb;
+      }
+    .form-group{
+      margin-bottom: 20px;
+      height: 30px;
+      line-height: 30px;
+    }
+    .dt{
+      float: left;
+      width: 135px;
+      padding-right: 10px;
+      line-height: 30px; 
+      text-align: right;
+    }
+    .input-txt{
+      width: 250px;
+      height: 28px;
+      padding: 0;
+      font-family: Microsoft YaHei;
+      text-indent: 10px;
+      border: 1px solid #ccc;
+    }
+    .line-height{
+      line-height: 28px\9;
+    }
+    select{
+      width: 252px;
+      height: 30px;
+      text-indent: 10px;
+      border: 1px solid #ccc;
+      font-family: Microsoft YaHei;
+    }
+    .select {
+      float: left;
+      width: 252px;
+      height: 30px;
+      font-size: 12px;
+      position: relative;
+      border: 1px solid #ccc;
+      background-color: #fff;
+    }
+.select-show {
+    display: block;
+    padding-left: 10px;
+    height: 33px;
+    line-height: 33px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+.select-show:link,.waper-tab li a{
+  text-decoration: none;
+}
+.select-list {
+    display: none;
+    position: absolute;
+    top: 31px;
+    left: -1px;
+    background-color: #fff;
+    width: 100%;
+    max-height: 180px;
+    overflow: auto;
+    padding-bottom: 2px;
+    border: 1px solid #e6e6e6;
+    box-shadow: 2px 2px 1px #e5e5e5;
+}
+.select-list dd {
+    text-indent: 7px;
+    margin: 2px 2px 0 2px;
+    line-height: 22px;
+    cursor: pointer;
+}
+.select-focus {
+    z-index: 10;
+}
+.icon-select {
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    width: 33px;
+    height: 33px;
+    background: url(bg/select.png) no-repeat center;
+}
+.has-prompt {
+    color: #bbb;
+}
+.on .icon-select {
+    background: url(bg/select_o.png) no-repeat center;
+}
+.on .select-list {
+    display: block;
+}
+.option-hover {
+    background-color: #eeeeee;
+}
+input[type="radio"],input[type="checkbox"]{
+   vertical-align: middle;
+   margin-top: -2px;
+   margin-right: 6px;
+}
+.rad{
+  line-height: 30px;
+}
+label{
+  margin-left: 60px;
+}
+.mar-rt{
+	margin: 0px;
+}
+.rad-iterm,.ck-emp {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 5;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    opacity: 0;
+}
+.pr{
+	position: relative;
+}
+.radio-img {
+	display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: -11%;
+    background: url("bg/radio.png");
+}
+.check-img {
+	display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: -5%;
+    background: url("bg/ck_d.png");
+}
+.li-click .radio-img {
+	background: url("bg/radio-on.png");
+}
+.li-click .check-img {
+	background: url("bg/ck_c.png");
+}
+	
+  </style>
+
+</head>
+<body>
+	<div class="form">
+      <div class="form-group">
+           <span class="dt">Input输入框：</span>
+           <input type="text" class="input-txt" value ="我是普通输入框" />
+      </div>
+      <div class="form-group">
+           <span class="dt">Input输入框：</span>
+           <input type="text" class="input-txt line-height" value ="我添加的line-height行高属性" />
+      </div>
+      <div class="form-group">
+           <span class="dt">Select选择框：</span>
+           <select>
+               <option>选择一</option>
+               <option>选择二</option>
+               <option>选择三</option>
+               <option>选择四</option>
+           </select>
+      </div>
+      <div class="form-group">
+           <span class="dt">Select选择框：</span>
+           <div class="select">
+                <input type="hidden" value="">
+                <a class="select-show" href="Javascript:;">
+                    <span class="select-text has-prompt">请选择部门</span>
+                    <span class="icon-select"></span>
+                </a>
+                <dl class="select-list">
+                    <dd data-value="1" class="select-option">分销产品研发部</dd>
+                    <dd data-value="2" class="select-option">航空产品研发部</dd>
+                    <dd data-value="3" class="select-option">应用产品研发部</dd>
+                    <dd data-value="4" class="select-option">综合管理部</dd>
+                </dl>
+            </div>
+      </div>
+      <div class="form-group">
+           <span class="dt">Radio单选框：</span>
+           <input type="radio" name="dio"><span class="rad">选择宋仲基</span> 
+           <label>
+                <input type="radio" name="dio">选择吴亦凡
+           </label>
+      </div>
+      <div class="form-group">
+           <span class="dt">Checkbox多选框：</span>
+           <input type="checkbox" name="dios"><span class="rad">选择宋仲基</span> 
+           <label>
+                <input type="checkbox" name="dios">选择吴亦凡
+           </label>
+      </div>
+      <div class="form-group">
+           <span class="dt">选择框：</span>
+           <label class="mar-rt pr">
+                <input type="radio" class="rad-iterm">
+                <span class="radio-img"></span>
+                选择太阳阳
+           </label>
+           <label class="pr">
+                <input type="checkbox" class="ck-emp">
+                <span class="check-img"></span>
+                选择星星星
+           </label>
+      </div>
+        
+  </div>
+  <script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+//select下拉框交互效果
+    $(document).on("click", ".select-show",function () {
+        var selects = $(".select"),
+            select = $(this).closest(".select"),
+            list = select.find(".select-list");
+        if (select.hasClass("select-disable")) {
+            return;
+        }
+        if (select.hasClass("on")) {
+            selects.removeClass("select-focus on");
+        }
+        else {
+            selects.removeClass("select-focus on");
+            select.addClass("select-focus on");
+        }
+
+    }).on("click", ".select-option",function () {
+            var select = $(this).closest(".select");
+            select.find(".select-text").text($(this).text()).removeClass("has-prompt");
+            select.find("input").val($(this).attr("data-value"));
+            select.removeClass("select-focus on");
+
+        }).on("mouseover", ".select-option",function () {
+            $(this).addClass("option-hover");
+
+        }).on("mouseout", ".select-option",function () {
+            $(this).removeClass("option-hover");
+
+        }).on("click", function (e) {
+            var heNode = $(e.target).closest(".select");
+            if (heNode.length == 0) {
+                var selects = $(".select");
+                selects.each(function () {
+                    if ($(this).hasClass("on")) {
+                        $(this).removeClass("select-focus on");
+                        return false;
+                    }
+                });
+            }
+        });
+        $(".rad-iterm").on("click",function(){
+	 		if($(this).is(':checked')){
+		        $(this).parents("label").addClass("li-click");
+		    }else{
+		    	$(this).parents("label").removeClass("li-click");
+		    }
+	 	});
+	 	 $(".ck-emp").on("click",function(){
+	 		if($(this).is(':checked')){
+		        $(this).parents("label").addClass("li-click");
+		    }else{
+		    	$(this).parents("label").removeClass("li-click");
+		    }
+	 	});
+      })
+      </script>
+</body>
+
+</html>

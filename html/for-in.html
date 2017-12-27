@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+   //使用for..in循环遍历对象属性 
+	var person={ 
+	  name: "yldeng", 
+	  age: 21, 
+	  address:"beibei" 
+	}; 
+	for(var i in person){ 
+	  console.log(i); 
+	}
+	//使用for..in循环遍历数组 
+//	    var array = ["one","two","three"];
+//		for(var i in array){ 
+//		   console.log(i); 
+//		} 
+		
+//	var array =["admin","manager","db"]; 
+//	//给Array的原型添加一个name属性 
+//	Array.prototype.name= "yldeng"; 
+//	for(var i in array){ 
+//	   console.log(array[i]); 
+//	} 
+//	
+//	var array = ["admin","manager","db"]; 
+//	//给Array的原型添加一个name属性 
+//	Array.prototype.name = "yldeng"; 
+//	for(var i =0 ; i<array.length; i++){ 
+//	    console.log(array[i]); 
+//	}; 
+	
+	
+	var array = ["admin","manager","db"]; 
+	Array.prototype.name= "yldeng"; 
+	for(var i in array){ 
+	//如果不是该对象自身直接创建的属性（也就是该属//性是原型中的属性），则跳过显示 
+	if(!array.hasOwnProperty(i)){ 
+	    continue; 
+	} 
+	  console.log(array[i]); 
+	} 
+</script>

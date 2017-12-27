@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+    *{
+    	padding: 0;
+    	margin: 0;
+    }
+    body{
+    	background: #eee;
+    }
+    #main{
+    	position: relative;
+    	margin: 0 auto;
+    }
+    .box{
+    	padding: 5px;
+    	background: #fff;
+    	margin-right: 20px;
+    	margin-bottom: 15px;
+    	padding-bottom: 10px;
+    	float: left;
+    }
+    .qwe{
+    	margin-right: -20px;
+    }
+	</style>
+</head>
+<body>
+	<div id="main">
+	    <div class="qwe">
+		<div class="box">
+			<img src="img/P_000.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_001.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_002.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_003.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_004.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_005.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_006.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_007.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_008.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_009.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_010.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_011.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_012.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_013.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_014.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_015.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_016.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_017.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_018.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_019.jpg">
+		</div>
+		<div class="box">
+			<img src="img/P_020.jpg">
+		</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		layOut();
+		var boxs = $("#main").find(".box");
+		var col;
+		var boxW;
+		var img;
+		var hArr = [];
+		var loadArr = [];
+		var clientH = document.body.clientHeight || document.documentElement.clientHeight;
+		waterFall(boxs);
+		//瀑布流页面布局-居中对齐
+		function layOut(){
+			var par = $("#main");
+		    boxW = $(".box").outerWidth(true);
+			var clientW = document.body.clientWidth || document.documentElement.clientWidth;
+			col = Math.floor(clientW/boxW);
+			var wid = col * boxW + "px";
+			par.css({
+                "width" : wid
+			})
+		}
+		//瀑布流定位
+		function waterFall(boxs){
+            for (var i = 0; i < boxs.length; i++) {
+            	 var hgt =   boxs[i].offsetHeight || boxs[i].style.height ||  boxs[i].height;
+            	 if(hArr.length < col){
+                    hArr.push(hgt);
+                    var left = i*boxW;
+                    boxs[i].style.position = 'absolute';
+                    boxs[i].style.top = 0 + 'px';
+                    boxs[i].style.left = left + 'px';
+                    hArr[index] = hgt;
+            	 }else{
+                     var minH = Math.min.apply(null,hArr);
+                     var index = getArrayIndex(hArr, minH);
+                     var left = index*boxW;
+                     boxs[i].style.position = 'absolute';
+                     boxs[i].style.top = minH + 'px';
+                     boxs[i].style.left = left + 'px';
+                     hArr[index] =  minH + hgt;
+            	 }
+            }
+		}
+		//获取最小高度索引值
+		function getArrayIndex(arrayy, val) {
+            for (var i = 0; i < arrayy.length; i++) {
+               if (arrayy[i] == val) {
+                   return i;
+                }
+            }
+        }
+
+        //加载数据
+        function load(){
+        	loadArr = [];
+        	var ajData = {'data': [
+            {'src': 'img/P_021.jpg'},
+            {'src': 'img/P_042.jpg'},
+            {'src': 'img/P_023.jpg'},
+            {'src': 'img/P_024.jpg'},
+            {'src': 'img/P_025.jpg'},
+            {'src': 'img/P_026.jpg'},
+            {'src': 'img/P_027.jpg'},
+            {'src': 'img/P_028.jpg'},
+            {'src': 'img/P_029.jpg'},
+            {'src': 'img/P_030.jpg'},
+            {'src': 'img/P_031.jpg'},
+            {'src': 'img/P_032.jpg'},
+            {'src': 'img/P_033.jpg'},
+            {'src': 'img/P_034.jpg'},
+            {'src': 'img/P_035.jpg'},
+            {'src': 'img/P_036.jpg'},
+            {'src': 'img/P_037.jpg'},
+            {'src': 'img/P_038.jpg'},
+            {'src': 'img/P_039.jpg'}
+            ]};
+            var par = $(".qwe")[0];
+            for (var i = 0; i < ajData.data.length; i++) {
+                var tBox = document.createElement('div');
+                tBox.className = 'box'; 
+                img = new Image();    
+                img.src = ajData.data[i].src;
+                tBox.appendChild(img);
+                par.appendChild(tBox); 
+                loadArr.push(tBox);
+            }
+            var explorer = window.navigator.userAgent ;
+          
+            if(explorer.indexOf("Chrome") >= 0){
+                   img.onload = function(){
+                       waterFall(loadArr);
+                }
+            }else{
+            	 waterFall(loadArr);
+            }
+            
+        }
+        //滚动鼠标
+        $(window).scroll(function() {
+        	var top = $(document).scrollTop() + clientH;
+        	var maxTop =  Math.max.apply(null,hArr) - 20;
+        	if(maxTop < top){
+        		load();
+        	}
+        })
+        //窗口大小切换
+		$(window).resize(function() {
+			boxs = $("#main").find(".box");
+			col = 0;
+			hArr.length = 0;
+			layOut();
+			waterFall(boxs);
+		});
+	}
+</script>
+</html>

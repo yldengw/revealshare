@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li>123</li>
+			<li>456</li>
+			<li>789</li>
+		</ul>
+	</body>
+</html>
+<script>
+	function show(){
+		var li = document.getElementsByTagName('li');
+		var length = li.length;
+		for(var i =0;i<length;i++){
+			li[i].onclick = function(){
+				alert(i);
+			}
+		}
+	}
+	show();
+</script>

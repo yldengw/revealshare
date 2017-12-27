@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+	eval("var i=4");
+	console.log(i);//4
+	var test = function(){
+		eval("var i=3");
+		console.log(i);
+	}
+	test();//3
+	console.log(i);//4
+</script>
