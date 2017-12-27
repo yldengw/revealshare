@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>js性能优化</title>
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-title" content="pageLayout">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        
+        <meta name ="viewport" content ="initial-scale=1, maximum-scale=3, minimum-scale=1, minimal-ui">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+		
+		<link rel="stylesheet" href="css/demo/icon-github.css">
+		<link rel="stylesheet" href="css/layout/lay.css">
+		<link rel="stylesheet" href="css/browser.css" />
+		<style type="text/css">
+                .reveal .slides section .fragment.shrink.visible {
+    -webkit-transform: scale(0.3);
+    -moz-transform: scale(0.3);
+    -ms-transform: scale(0.3);
+    -o-transform: scale(0.3);
+    transform: scale(0.3);
+    margin-top: -200px;
+     margin-bottom: -220px;
+}
+ .reveal .slides .p2 .fragment.shrink.visible {
+    -webkit-transform: scale(0.45);
+    -moz-transform: scale(0.45);
+    -ms-transform: scale(0.45);
+    -o-transform: scale(0.45);
+    transform: scale(0.45);
+    margin-top: -120px;
+     margin-bottom: -150px;
+}
+.reveal img:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #13daec;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); 
+}
+
+		</style>
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+			
+                <section data-transition="slide" >
+                    <h2>JS性能优化分享</h2>
+					<p class="ft-noml txt-lt">
+						javascript是一种解释型语言，性能无法达到和C、C++等编译语言的水平，限制了它能在客户端所做的事情。下面将自己在开发中遇到的js性能问题跟大家一起分享一下。
+					</p>
+			<!--		<p class="ft-noml txt-lt">
+
+					</p>
+					<p class="fragment grow  highlight-current-blue">
+						今天回到前端最本质的内容 —— <b>CODE</b>
+					</p>-->
+					<br>
+                    <p class="txt-rt ft-little">
+                        <span>ST - DYN</span>
+                        <br>
+                        2016-10-24
+                    </p>
+                </section>
+
+                <section>
+                    	<h3>1、推荐将所有script标签尽可能放到body标签的底部，以尽量减少对整个页面下载的影响</h3>
+                    	<div class="panle-box">
+							<p class="ft-noml">
+								<img  src="img\js\position.jpg">
+							</p>
+                    		<!--<div class="panle-lf">
+                    		<p class="ft-noml">
+					           网页设计中的每个标签元素都是方形的盒子。盒子的最终尺寸是如何计算的？
+					           <img width="510" height="450" src="img\layout\css-box.jpg">
+					        </p>
+                    	    </div>
+					        <div class="panle-rt">
+					    	<p class="ft-lt mar-top">
+					         1.在图中，元素框的最内部分是实际的内容（element）；直接包围内容的是内边距（padding），内边距呈现了元素的背景（background）；内边距的边缘是边框（border）；边框以外是外边距（margin），外边距默认是透明的，因此不会遮挡其后的任何元素。
+					        </p>
+					        <p class="ft-lt">2.增加内边距、边框和外边距不会影响内容区域的尺寸，但是会增加元素框的总尺寸。</p>
+					        <p class="ft-sm red">3.每个盒子模型占据的空间 = 元素内容（element content）+ 内边距（padding）+ 边框（border）+ 外边距（margin） </p>
+                            <p><a target="blank" href="html/box.html">狠戳 DEMO</a></p>
+					        </div>-->
+                    	</div>
+					    
+                </section>
+
+                <section data-transition="slide">
+                    <section>
+                        <h3>2、 把数字转换成字符串，应用"" + 1，虽然看起来比较丑一点，但事实上这个效率是最高的，性能上来说：("" +) > String() > .toString() > new String() </h3>
+                    </section>
+                   <!-- <section>
+                        <h3>Html标签的两种类型</h3>
+                        <div class="box">
+                            <p class="ft-noml">
+                               2. 内联元素 — 从左往右1个挨着1个水平排列在同一行
+                               <img width="650" height="300" src="img\砖.gif">
+                            </p>
+                            <p class="ft-little">包含的标签有：<span class="red">&lt;a&gt;、&lt;input&gt;、&lt;label&gt;、&lt;img&gt;、&lt;span&gt;</span>等等</p>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>Html标签的两种类型</h3>
+                            <p class="ft-noml">
+                              块元素一般都从新行开始，它可以容纳内联元素和其他块元素,而内联的元素嵌套也必须是内联元素
+                            </p>  
+                            <img src="img\layout\blk.jpg">
+                            <img src="img\layout\inlne.jpg">
+                            <img width="520"  src="img\layout\cuo.jpg">
+                    </section>-->
+                </section>
+
+                  <section>
+                  	<section>
+                     <h2>3、eval函数</h2>
+                     <p class="ft-noml">用来解析JSON数据：eval("("+data+")")</p>
+						<p class="ft-noml">eval()函数动态执行的代码并不会创建新的作用域，其代码就是在当前的作用域执行的 </p>
+						<p><img src="img\js\eval.jpg"></p>
+					</section>
+					 <section>
+					<p class="fragment grow highlight-current-blue">
+						1.可读性非常差
+					</p>
+					<p class="fragment grow highlight-current-blue">
+						2.不好再做优化和编译
+					</p>
+					<p class="fragment grow highlight-current-blue">
+						3.会轻微增加性能消耗
+					</p>
+					  <p class="fragment grow highlight-current-blue">
+						  4.不安全，比如 eval input 的值
+					  </p>
+					  </section>
+                </section>
+							
+                <section>
+                    <section>
+						<h3>4、事件延迟执行 </h3>
+						<p class="ft-noml">延迟执行，一般是用定时器，定时器有两种，一种是setInterval，另一个是setTimeout。setInterval，是间隔执行，次数为无限次。
+setTimeout，是隔一段时间，执行一次。
+setTimeout() 方法可按照指定的周期（以毫秒计）来调用函数或计算表达式。
+setInterval() 方法会不停地调用函数，直到 clearInterval() 被调用或窗口被关闭。 </p>
+                        <p><a target="blank" href="html/delay.html">狠戳 DEMO</a></p>
+					</section>					
+                </section>
+				
+                <section>
+                    <section>
+                    	<h2>5、前端优化</h2>
+						<h3>分为请求优化和资源优化</h3>
+						<p class="fragment grow highlight-current-blue">
+							1.图片延迟加载
+						</p>
+						<p class="fragment grow highlight-current-blue">
+							2.ajax局部加载数据
+						</p>
+						<p class="fragment grow highlight-current-blue">
+							3.预加载
+						</p>
+						  <p class="fragment grow highlight-current-blue">
+							  4.资源压缩
+						  </p>
+						   <p class="fragment grow highlight-current-blue">
+							  5.iconfont
+						  </p>
+					</section>					
+                </section>
+
+                <section>
+                    <h3>6、for-in循环</h3>
+                    <p class="ft-noml">
+                        javascript提供了一种特殊的循环（也就是for .. in循环），
+                        用来迭代对象的属性或数组的每个元素，for...in循环中的循环计数器是字符串，而不是数字。它包含当前属性的名称或当前数组元素的索引。
+                    </p>
+                    <p>
+                    <p><a>看demo</a></p>      
+                </section>
+
+				
+                <section>
+                    <section>
+						<h2>7、减少对DOM的操作</h2>
+					    <p class="ft-noml">DOM操作应该是脚本中最耗性能的一类操作，
+					    	例如增加、修改、删除DOM元素或者对DOM集合进行操作，需要注意两点</p>
+					    <p class="fragment grow highlight-current-blue">
+							1.HTML Collection
+						</p>
+						 <p class="fragment grow highlight-current-blue">
+							2.relow & repaint
+						</p>
+					</section>
+                    <section>
+						<h2>HTML Collection</h2>
+					    <p class="ft-noml">
+						   当你需要遍历HTML Collection的时候，尽量将它转为数组后再访问，以提高性能，即使不能转换为数组，也请尽可能少的访问它，例如在遍历的时候可以将length属性、成员保存到局部变量后再使用局部变量。
+					    </p>
+					    <p>
+					        <a target="blank" href="html/dom.html">狠戳 DEMO</a>
+					    </p>
+					</section>					
+                    <section>
+						<h2>relow & repaint</h2>
+						<p>
+						   就是重流和重绘,重流发生情况:
+					    </p>
+					   <p class="fragment grow highlight-current-blue">
+							1.添加或删除可见的DOM元素
+						</p>
+						<p class="fragment grow highlight-current-blue">
+							2.元素内容、位置和尺寸改变
+						</p>
+						<p class="fragment grow highlight-current-blue">
+							3.浏览器窗口尺寸改变等
+						</p>
+						<p>
+						   发生重流就一定会发生重绘，重绘会严重影响页面性能，但当你仅仅改变字体颜色，页面背景颜色等，比较“肤浅”的操作，是不会打扰到重绘的。
+					    </p>
+					</section>
+                </section>
+                
+                 <section>
+                    <section>
+						<h2>8、事件机制的事件绑定、事件监听和事件委托</h2>
+					    <p class="ft-noml">有三种绑定事件的方法：a、在DOM元素中直接绑定 b、在Javascript代码中绑定
+						c、绑定事件监听函数</p>
+						<p><a target="blank" href="html/listener.html">狠戳 DEMO1
+					</section>
+					 <section>
+						<h2>事件委托</h2>
+					    <p class="ft-noml">
+						   事件委托：1提高javascript性能，处理速度，减少内存的占用
+                                   2动态的添加DOM元素，不需要因为元素的改动而修改绑定
+					    </p>
+					    <p>
+					        <a target="blank" href="html/weituo.html">狠戳 DEMO</a>
+					    </p>
+					</section>	
+				</section>
+				<section>
+                    <section>
+						<h3>9、避免重复脚本</h3>
+						<p class="fragment grow highlight-current-blue">
+							1.代码混乱，同样功能的函数重复出现在多个地方
+						</p>
+						<p class="fragment grow highlight-current-blue">
+							2.使用时需要加载多个单独的javascript文件，增加了http请求数降低性能
+						</p>
+						<p class="fragment grow highlight-current-blue">
+							3.缺乏文档
+						</p>
+                    </section>	
+                    <section>
+                    	 <h3>建议优化</h3>
+                    	<p class="fragment grow highlight-current-blue">
+							1.模块化，提取公共接口，方便代码重用
+						</p>
+						<p class="fragment grow highlight-current-blue">
+							2.对公共的js合并压缩，减少了size的同时，也减少了http请求数
+						</p>
+						<p class="fragment grow highlight-current-blue">
+							3.编写文档，对公共库的每个类、函数、属性都有说明文档
+						</p>
+                    </section>
+                </section>
+                <section >
+					<img src="img/thanks.png" width="500px" />
+			  </section>
+            </div>
+
+        </div>
+
+        <div class="powered">
+            <p>devicePixelRatio</p>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                history: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
